@@ -5,32 +5,53 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <div id="previous-operand" class="previous-operand"></div>
-            <div id="current-operand" class="current-operand">0</div>
-        </div>
-        <div class="keys">
-            <button class="span-two" onclick="clearResult()">AC</button>
-            <button onclick="deleteLast()">DEL</button>
-            <button class="operator" onclick="setOperator('÷')">÷</button>
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button class="operator" onclick="setOperator('×')">×</button>
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button class="operator" onclick="setOperator('-')">-</button>
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button class="operator" onclick="setOperator('+')">+</button>
-            <button onclick="appendNumber('0')">0</button>
-            <button onclick="appendNumber('.')">.</button>
-            <button class="span-two operator" onclick="calculate()">=</button>
-        </div>
+    <div class="container">
+        <header>
+            <h1>MY CALCULATOR</h1>
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'calculator-tab')">MY CALCULATOR</button>
+                <button class="tab-button" onclick="openTab(event, 'get-started-tab')">GET STARTED</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="calculator-tab" class="tab-content active">
+                <div class="calculator">
+                    <div class="display">
+                        <div id="previous-operand" class="previous-operand"></div>
+                        <div id="current-operand" class="current-operand">0</div>
+                    </div>
+                    <div class="keys">
+                        <button class="span-two" onclick="clearResult()">AC</button>
+                        <button onclick="deleteLast()">DEL</button>
+                        <button class="operator" onclick="setOperator('÷')">÷</button>
+                        <button onclick="appendNumber('7')">7</button>
+                        <button onclick="appendNumber('8')">8</button>
+                        <button onclick="appendNumber('9')">9</button>
+                        <button class="operator" onclick="setOperator('×')">×</button>
+                        <button onclick="appendNumber('4')">4</button>
+                        <button onclick="appendNumber('5')">5</button>
+                        <button onclick="appendNumber('6')">6</button>
+                        <button class="operator" onclick="setOperator('-')">-</button>
+                        <button onclick="appendNumber('1')">1</button>
+                        <button onclick="appendNumber('2')">2</button>
+                        <button onclick="appendNumber('3')">3</button>
+                        <button class="operator" onclick="setOperator('+')">+</button>
+                        <button onclick="appendNumber('0')">0</button>
+                        <button onclick="appendNumber('.')">.</button>
+                        <button class="span-two operator" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="get-started-tab" class="tab-content">
+                <h2>Welcome to MY CALCULATOR!</h2>
+                <p>This is a simple, easy-to-use calculator built with HTML, CSS, and JavaScript.</p>
+                <p>Click on the "MY CALCULATOR" tab to start using the calculator.</p>
+            </div>
+        </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
