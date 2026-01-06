@@ -10,6 +10,12 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+  
+  if (tabName === 'scientific-tab') {
+    document.body.classList.add('sci-bg');
+  } else {
+    document.body.classList.remove('sci-bg');
+  }
 }
 
 class Calculator {
@@ -111,29 +117,62 @@ class Calculator {
     }
 }
 
+class ScientificCalculator extends Calculator {
+    constructor(previousOperandTextElement, currentOperandTextElement) {
+        super(previousOperandTextElement, currentOperandTextElement);
+    }
+
+    performUnaryOperation(operation) {
+        if (this.currentOperand === '') return;
+        let result;
+        const current = parseFloat(this.currentOperand);
+        if (isNaN(current)) return;
+
+        switch (operation) {
+            case 'sin':
+                result = Math.sin(Math.PI / 180 * current); // convert to radians
+                break;
+            case 'cos':
+                result = Math.cos(Math.PI / 180 * current); // convert to radians
+                break;
+            case 'tan':
+                result = Math.tan(Math.PI / 180 * current); // convert to radians
+                break;
+            case 'log':
+                result = Math.log10(current);
+                break;
+            case 'sqrt':
+                result = Math.sqrt(current);
+                break;
+            default:
+                return;
+        }
+        this.currentOperand = result;
+        this.operation = undefined;
+        this.previousOperand = '';
+        this.updateDisplay();
+    }
+}
+
 const previousOperandTextElement = document.getElementById('previous-operand')
 const currentOperandTextElement = document.getElementById('current-operand')
-
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
-function appendNumber(number) {
-    calculator.appendNumber(number)
-}
+const sciPreviousOperandTextElement = document.getElementById('sci-previous-operand')
+const sciCurrentOperandTextElement = document.getElementById('sci-current-operand')
+const sciCalculator = new ScientificCalculator(sciPreviousOperandTextElement, sciCurrentOperandTextElement)
 
-function setOperator(operator) {
-    calculator.chooseOperation(operator)
-}
+function appendNumber(number) { calculator.appendNumber(number) }
+function setOperator(operator) { calculator.chooseOperation(operator) }
+function calculate() { calculator.compute() }
+function clearResult() { calculator.clear() }
+function deleteLast() { calculator.delete() }
 
-function calculate() {
-    calculator.compute()
-}
+function sciAppendNumber(number) { sciCalculator.appendNumber(number) }
+function sciSetOperator(operator) { sciCalculator.chooseOperation(operator) }
+function sciCalculate() { sciCalculator.compute() }
+function sciClear() { sciCalculator.clear() }
+function sciDelete() { sciCalculator.delete() }
+function sciPerformUnaryOperation(operation) { sciCalculator.performUnaryOperation(operation) }
 
-function clearResult() {
-    calculator.clear()
-}
-
-function deleteLast() {
-    calculator.delete()
-}
-// Get the element with id="defaultOpen" and click on it
 document.getElementsByClassName("tab-button")[0].click();

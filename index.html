@@ -10,6 +10,7 @@
             <h1>MY CALCULATOR</h1>
             <div class="tabs">
                 <button class="tab-button active" onclick="openTab(event, 'calculator-tab')">MY CALCULATOR</button>
+                <button class="tab-button" onclick="openTab(event, 'scientific-tab')">SCIENTIFIC</button>
                 <button class="tab-button" onclick="openTab(event, 'get-started-tab')">GET STARTED</button>
             </div>
         </header>
@@ -40,6 +41,45 @@
                         <button onclick="appendNumber('0')">0</button>
                         <button onclick="appendNumber('.')">.</button>
                         <button class="span-two operator" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scientific-tab" class="tab-content">
+                <div class="calculator scientific">
+                    <div class="display">
+                        <div id="sci-previous-operand" class="previous-operand"></div>
+                        <div id="sci-current-operand" class="current-operand">0</div>
+                    </div>
+                    <div class="keys sci-keys">
+                        <button onclick="sciPerformUnaryOperation('sin')">sin</button>
+                        <button onclick="sciPerformUnaryOperation('cos')">cos</button>
+                        <button onclick="sciPerformUnaryOperation('tan')">tan</button>
+                        <button onclick="sciPerformUnaryOperation('log')">log</button>
+                        <button onclick="sciPerformUnaryOperation('sqrt')">√</button>
+                        
+                        <button class="span-two" onclick="sciClear()">AC</button>
+                        <button onclick="sciDelete()">DEL</button>
+                        <button class="operator" onclick="sciSetOperator('÷')">÷</button>
+                        
+                        <button onclick="sciAppendNumber('7')">7</button>
+                        <button onclick="sciAppendNumber('8')">8</button>
+                        <button onclick="sciAppendNumber('9')">9</button>
+                        <button class="operator" onclick="sciSetOperator('×')">×</button>
+
+                        <button onclick="sciAppendNumber('4')">4</button>
+                        <button onclick="sciAppendNumber('5')">5</button>
+                        <button onclick="sciAppendNumber('6')">6</button>
+                        <button class="operator" onclick="sciSetOperator('-')">-</button>
+                        
+                        <button onclick="sciAppendNumber('1')">1</button>
+                        <button onclick="sciAppendNumber('2')">2</button>
+                        <button onclick="sciAppendNumber('3')">3</button>
+                        <button class="operator" onclick="sciSetOperator('+')">+</button>
+                        
+                        <button onclick="sciAppendNumber('0')">0</button>
+                        <button onclick="sciAppendNumber('.')">.</button>
+                        <button class="span-two operator" onclick="sciCalculate()">=</button>
                     </div>
                 </div>
             </div>
