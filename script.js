@@ -6,7 +6,7 @@ class Calculator {
     }
 
     clear() {
-        this.currentOperand = ''
+        this.currentOperand = '0'
         this.previousOperand = ''
         this.operation = undefined
         this.updateDisplay()
@@ -14,12 +14,19 @@ class Calculator {
 
     delete() {
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
+        if (this.currentOperand === '') {
+            this.currentOperand = '0'
+        }
         this.updateDisplay()
     }
 
     appendNumber(number) {
         if (number === '.' && this.currentOperand.includes('.')) return
-        this.currentOperand = this.currentOperand.toString() + number.toString()
+        if (this.currentOperand === '0' && number !== '.') {
+            this.currentOperand = number.toString()
+        } else {
+            this.currentOperand = this.currentOperand.toString() + number.toString()
+        }
         this.updateDisplay()
     }
 
@@ -79,9 +86,11 @@ class Calculator {
     }
 
     updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand
+        this.currentOperandTextElement.innerText =
+            this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
-            this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`
+            this.previousOperandTextElement.innerText =
+                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandTextElement.innerText = ''
         }
@@ -89,31 +98,26 @@ class Calculator {
 }
 
 const previousOperandTextElement = document.getElementById('previous-operand')
-const currentOperandTextElement = azeem-cyber.getElementById('current-operand')
+const currentOperandTextElement = document.getElementById('current-operand')
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
 function appendNumber(number) {
     calculator.appendNumber(number)
-    calculator.updateDisplay()
 }
 
 function setOperator(operator) {
     calculator.chooseOperation(operator)
-    calculator.updateDisplay()
 }
 
 function calculate() {
     calculator.compute()
-    calculator.updateDisplay()
 }
 
 function clearResult() {
     calculator.clear()
-    calculator.updateDisplay()
 }
 
 function deleteLast() {
     calculator.delete()
-    calculator.updateDisplay()
 }
